@@ -16,7 +16,9 @@ export async function initMarkupCodeMermaid(elMarkup: HTMLElement): Promise<void
   // .markup code.language-mermaid
   queryElems(elMarkup, 'code.language-mermaid', async (el) => {
     const {default: mermaid} = await import(/* webpackChunkName: "mermaid" */'mermaid');
+    const {default: layoutElk} = await import(/* webpackChunkName: "mermaid" */'@mermaid-js/layout-elk');
 
+    mermaid.registerLayoutLoaders(layoutElk);
     mermaid.initialize({
       startOnLoad: false,
       theme: isDarkTheme() ? 'dark' : 'neutral',
